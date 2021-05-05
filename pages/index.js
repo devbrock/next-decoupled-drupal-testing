@@ -2,10 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import useDrupalJSONAPI from "../hooks/useDrupalJSONAPI";
 
-export default function Home({ articlesData, personsData }) {
-  const { data: articles, included: photos } = articlesData;
-  const { data: persons, included: headshots } = personsData;
-
+export default function Home({ articles, photos, persons, headshots }) {
   return (
     <div>
       <Head>
@@ -67,13 +64,16 @@ export async function getStaticProps() {
     collection: "article",
     include: ["field_image"],
   });
+  const { data: articles, included: photos } = articlesData;
 
   let personsData = await useDrupalJSONAPI({
     baseURL: "https://dev-drupal-api-testing.pantheonsite.io/",
     collection: "person",
     include: ["field_headshot"],
   });
+  const { data: persons, included: headshots } = personsData;
+
   return {
-    props: { articlesData, personsData },
+    props: { articles, photos, persons, headshots },
   };
 }
