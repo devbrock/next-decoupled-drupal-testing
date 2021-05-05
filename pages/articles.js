@@ -30,7 +30,12 @@ export default function articles({ articles, photos }) {
                   width={1600}
                   height={900}
                 />
-                <p>{article.attributes.body.value}</p>
+                <div
+                  id="danger"
+                  dangerouslySetInnerHTML={{
+                    __html: article.attributes.body?.processed,
+                  }}
+                />
               </article>
             );
           })}
