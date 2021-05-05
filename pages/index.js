@@ -1,6 +1,10 @@
 import Head from "next/head";
+import Image from "next/image";
 
-export default function Home() {
+export default function Home({ articles, photos }) {
+  console.log("articles", articles);
+  console.log("photos", photos);
+
   return (
     <div>
       <Head>
@@ -9,23 +13,43 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="min-h-screen max-w-screen-lg mx-auto flex flex-col items-center justify-center">
-        <h1 className="text-4xl font-bold">
-          Welcome to{" "}
-          <a href="https://nextjs.org" className="text-blue-500">
-            Next.js
-          </a>{" "}
-          +{" "}
-          <a href="https://tailwindcss.com" className="text-green-700">
-            Tailwind
-          </a>
-          !
-        </h1>
+      <main className="prose mx-auto py-16 flex flex-col items-center justify-center">
+        <h1>Welcome to Next.js + Tailwind+ Decoupled Drupal !</h1>
 
-        <p>
-          Get started by editing <code>pages/index.js</code>
-        </p>
+        <div className="divide-y-4 divide-gray-200 space-y-4 py-12">
+          {articles.map((article, index) => {
+            return (
+              <article key={article.id} className="prose py-4">
+                <h3>{article.attributes.title}</h3>
+                <Image
+                  src={
+                    "https://dev-drupal-api-testing.pantheonsite.io" +
+                    photos[index].attributes.uri.url
+                  }
+                  alt="some image" //TODO : figure out how to get alt text???
+                  width={1600}
+                  height={900}
+                  priority
+                />
+                <p>{photos[index].attributes.filename}</p>
+                <p>{article.attributes.body.value}</p>
+              </article>
+            );
+          })}
+        </div>
       </main>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  let response = await fetch(
+    "https://dev-drupal-api-testing.pantheonsite.io/jsonapi/node/article?include=field_image"
+  );
+  let data = await response.json();
+  let articles = await data.data;
+  let photos = await data.included;
+  return {
+    props: { articles, photos }, // will be passed to the page component as props
+  };
 }
