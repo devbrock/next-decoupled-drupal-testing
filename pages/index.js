@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 
-export default function Home({ articles, photos, persons, headshots }) {
+export default function Home() {
   return (
     <div>
       <Head>

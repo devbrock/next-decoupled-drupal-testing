@@ -4,6 +4,7 @@ import Link from "next/link";
 import useDrupalJSONAPI from "../hooks/useDrupalJSONAPI";
 
 export default function people({ persons, headshots }) {
+  console.log(headshots);
   return (
     <div>
       <Head>
@@ -22,11 +23,12 @@ export default function people({ persons, headshots }) {
               <article key={person.id} className="prose py-4">
                 <h3>{person.attributes.title}</h3>
                 <Image
-                  src={
-                    "https://dev-drupal-api-testing.pantheonsite.io" +
-                    headshots[index].attributes.uri.url
-                  }
-                  alt="some image" //TODO : figure out how to get alt text???
+                  //   src={
+                  //     "https://dev-drupal-api-testing.pantheonsite.io" +
+                  //     headshots[index].attributes.uri.url
+                  //   }
+                  src={`/images/${headshots[index].attributes.filename}`}
+                  alt={person.relationships.field_headshot.data.meta.alt}
                   width={1000}
                   height={1000}
                 />

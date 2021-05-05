@@ -22,11 +22,12 @@ export default function articles({ articles, photos }) {
               <article key={article.id} className="prose py-4">
                 <h3>{article.attributes.title}</h3>
                 <Image
-                  src={
-                    "https://dev-drupal-api-testing.pantheonsite.io" +
-                    photos[index].attributes.uri.url
-                  }
-                  alt="some image" //TODO : figure out how to get alt text???
+                  // src={
+                  //   "https://dev-drupal-api-testing.pantheonsite.io" +
+                  //   photos[index].attributes.uri.url
+                  // }
+                  src={`/images/${photos[index].attributes.filename}`}
+                  alt={article.relationships.field_image.data.meta.alt} //TODO : figure out how to get alt text???
                   width={1600}
                   height={900}
                 />
