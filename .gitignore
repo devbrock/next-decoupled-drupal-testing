@@ -34,4 +34,5 @@ yarn-error.log*
 .vercel
 
 #images
-/public/images*
+/public/images/*
+!public/images/keep.js
