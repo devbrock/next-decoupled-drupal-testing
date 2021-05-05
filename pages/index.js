@@ -1,6 +1,5 @@
 import Head from "next/head";
-import Image from "next/image";
-import useDrupalJSONAPI from "../hooks/useDrupalJSONAPI";
+import Link from "next/link";
 
 export default function Home({ articles, photos, persons, headshots }) {
   return (
@@ -12,68 +11,13 @@ export default function Home({ articles, photos, persons, headshots }) {
       </Head>
       <main className="prose mx-auto py-16 flex flex-col items-center justify-center">
         <h1>Welcome to Next.js + Tailwind+ Decoupled Drupal !</h1>
-        <div className="divide-y-4 divide-gray-200 space-y-4 py-12">
-          <h2>Articles</h2>
-          {articles?.map((article, index) => {
-            return (
-              <article key={article.id} className="prose py-4">
-                <h3>{article.attributes.title}</h3>
-                <Image
-                  src={
-                    "https://dev-drupal-api-testing.pantheonsite.io" +
-                    photos[index].attributes.uri.url
-                  }
-                  alt="some image" //TODO : figure out how to get alt text???
-                  width={1600}
-                  height={900}
-                  priority
-                />
-                <p>{article.attributes.body.value}</p>
-              </article>
-            );
-          })}
-        </div>
-        <div className="divide-y-4 divide-gray-200 space-y-4 py-12">
-          <h2>People</h2>
-          {persons?.map((person, index) => {
-            return (
-              <article key={person.id} className="prose py-4">
-                <h3>{person.attributes.title}</h3>
-                <Image
-                  src={
-                    "https://dev-drupal-api-testing.pantheonsite.io" +
-                    headshots[index].attributes.uri.url
-                  }
-                  alt="some image" //TODO : figure out how to get alt text???
-                  width={1000}
-                  height={1000}
-                />
-                <p>{person.attributes.field_biography}</p>
-              </article>
-            );
-          })}
-        </div>
+        <Link href="/articles">
+          <a>View Articles</a>
+        </Link>
+        <Link href="/people">
+          <a>View People</a>
+        </Link>
       </main>
     </div>
   );
-}
-
-export async function getStaticProps() {
-  let articlesData = await useDrupalJSONAPI({
-    baseURL: "https://dev-drupal-api-testing.pantheonsite.io/",
-    collection: "article",
-    include: ["field_image"],
-  });
-  const { data: articles, included: photos } = articlesData;
-
-  let personsData = await useDrupalJSONAPI({
-    baseURL: "https://dev-drupal-api-testing.pantheonsite.io/",
-    collection: "person",
-    include: ["field_headshot"],
-  });
-  const { data: persons, included: headshots } = personsData;
-
-  return {
-    props: { articles, photos, persons, headshots },
-  };
 }
