@@ -1,5 +1,6 @@
 export default async function useDrupalJSONAPI(options) {
   let includeString = "";
+  let sortString = "";
 
   if (options.include) {
     includeString = "?include=";
@@ -8,11 +9,18 @@ export default async function useDrupalJSONAPI(options) {
     });
   }
 
+  // if (options.sort) {
+  //   sortString = "sort=";
+  //   options.sort.forEach((element) => {
+  //     sortString += element;
+  //   });
+  // }
+
   // Fetch the data
   let response = await fetch(
     `${options.baseURL}/${options.apiBase || "jsonapi"}/node/${
       options.collection
-    }${includeString}`
+    }${includeString}${options.sort ? "&sort=" + options.sort : ""}`
   );
 
   // check if request was successful

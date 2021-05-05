@@ -50,6 +50,7 @@ export async function getStaticProps() {
     baseURL: "https://dev-drupal-api-testing.pantheonsite.io/",
     collection: "article",
     include: ["field_image"],
+    sort: "created",
   });
   const { data: articles, included: photos } = articlesData;
 
