@@ -1,20 +1,12 @@
 export default async function useDrupalJSONAPI(options) {
-  let includeString = "";
-  let sortString = "";
+  let includeString;
 
   if (options.include) {
     includeString = "?include=";
-    options.include.forEach((element) => {
-      includeString += element;
+    options.include.forEach((fieldToInclude) => {
+      includeString += fieldToInclude;
     });
   }
-
-  // if (options.sort) {
-  //   sortString = "sort=";
-  //   options.sort.forEach((element) => {
-  //     sortString += element;
-  //   });
-  // }
 
   // Fetch the data
   let response = await fetch(

@@ -1874,6 +1874,11 @@ react-dom@17.0.2:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
+react-drupal-json-api@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-drupal-json-api/-/react-drupal-json-api-1.0.1.tgz#9784258f8b876781547dde2fccd80c752aa94a21"
+  integrity sha512-R/+G0+DdyEYpZdZJDm0ExLmPWwJI9ZaUyJccAl4iw8INSmJqjeN2L1G33hfD4vagfpDoiobZ4kwQ+sDsT6ygJg==
+
 react-is@16.13.1, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"

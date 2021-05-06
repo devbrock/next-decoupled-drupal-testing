@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import useDrupalJSONAPI from "../hooks/useDrupalJSONAPI";
+import { useDrupalJSONAPI } from "react-drupal-json-api";
 
 export default function articles({ articles, photos }) {
   return (
