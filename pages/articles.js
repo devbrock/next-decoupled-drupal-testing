@@ -29,6 +29,7 @@ export default function articles({ articles, photos }) {
                   alt={article.relationships.field_image.data.meta.alt}
                   width={1600}
                   height={900}
+                  priority
                 />
                 <div
                   id="danger"

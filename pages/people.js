@@ -29,6 +29,7 @@ export default function people({ persons, headshots }) {
                   alt={person.relationships.field_headshot.data.meta.alt}
                   width={1000}
                   height={1000}
+                  priority
                 />
                 <p>{person.attributes.field_biography}</p>
               </article>
