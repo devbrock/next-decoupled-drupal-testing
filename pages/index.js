@@ -17,6 +17,9 @@ export default function Home() {
         <Link href="/people">
           <a>View People</a>
         </Link>
+        <Link href="/text">
+          <a>Just Text</a>
+        </Link>
       </main>
     </div>
   );
